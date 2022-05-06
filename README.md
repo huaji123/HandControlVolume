@@ -1,0 +1,2 @@
+# HandControlVolume
+利用opencv开发的人工智能小项目，通过手势控制电脑音量
