@@ -10,11 +10,16 @@ from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 wCam, hCam = 640, 480
 ###################
 
+# 开启摄像头，如果有两个摄像头，则参数为1
 cap = cv2.VideoCapture(0)
+
 cap.set(3, wCam)
 cap.set(4, hCam)
+
+# 帧率
 pTime = 0
 
+# 调用手势识别模块，将识别置信度设置为0.7
 detector = htm.handDetector(detectionCon=0.7)
 
 
@@ -23,15 +28,18 @@ interface = devices.Activate(
     IAudioEndpointVolume._iid_, CLSCTX_ALL, None
 )
 volume = cast(interface, POINTER(IAudioEndpointVolume))
-#volume.GetMute()
+# volume.GetMute()
 # volume.GetMasterVolumeLevel()
 volRange = volume.GetVolumeRange()
 
 minVol = volRange[0]
 maxVol = volRange[1]
+
+# 定义音量控制条位置以及百分比位置
 vol = 0
 volBar = 400
 volPer = 0
+
 while True:
     success, img = cap.read()
     img = detector.findHands(img)
