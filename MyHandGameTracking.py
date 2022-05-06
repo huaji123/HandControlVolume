@@ -3,9 +3,12 @@ import mediapipe as mp
 import time
 import HandTrackingModule as htm
 
+# 帧率
 pTime = 0
 cTime = 0
+# 开启摄像头，如果有两个摄像头，则参数为1
 cap = cv2.VideoCapture(0)
+# 调用手势识别模块
 detector = htm.handDetector()
 while True:
     success, img = cap.read()
